@@ -17,8 +17,6 @@ Hãy tạo ra ít nhất 5 loại hoa
 Mỗi loại hoa cần có màu sắc kích thước và vị trí khác nhau
 Hãy vẽ thêm đám cỏ ở phía dưới cây hoa (click vào cỏ thì cỏ không lớn lên được)
 ***************/
-
-
 noStroke();
 
 /******************
@@ -136,16 +134,18 @@ var House = function(x, y, width) {
   this.y = y;
   this.width = width;
 }
+
+House.prototype.draw = function () {
     /**********
     Đặt biến
     **********/
     /**********************
       Biến cho nền nhà
     **********************/
-    var nenNha_w = 400;
+    var nenNha_w = this.width;
     var nenNha_h = nenNha_w / 8; //50
-    var nenNha_x = 200;
-    var nenNha_y = 300;
+    var nenNha_x = this.x;
+    var nenNha_y = this.y;
     var nenNha_col = nenNha_w / 12;//chiều rộng nền nhà chia 120 phần bằng nhau = 3.33;
     var nenNha_row = nenNha_h / 3;//chiều cao nền nhà chia 3 phần bằng nhau
 
@@ -218,7 +218,7 @@ var House = function(x, y, width) {
     /******************
     *House Object Function
     *******************/
-var veNha = function () {
+
 
   /****Thân nhà****/
   noStroke();
@@ -260,11 +260,6 @@ var veNha = function () {
     rect(bacThem_x - nenNha_col * 0, bacThem_y, bacThem_w, bacThem_h);
     rect(bacThem_x - nenNha_col * 0.5, bacThem_y + bacThem_h * 1, bacThem_w + nenNha_col * 1, bacThem_h);
     rect(bacThem_x - nenNha_col * 1, bacThem_y + bacThem_h * 2, bacThem_w + nenNha_col * 2, bacThem_h);
-    // for(i = bacThem_x; i > bacThem_x - nenNha_col * 1.5; i -= nenNha_col * 0.5) {
-    //   for(j = bacThem_y; j < nenNha_y + 2 + bacThem_h * 3; j+= bacThem_h){
-    //     rect(i, j, bacThem_w, bacThem_h);
-    //   }
-    // };
 
   /****Mái nhà****/
     //Mái trên hình chữ nhật
@@ -285,7 +280,6 @@ var veNha = function () {
 /****Trang trí****/
   /***Lồng đèn***/
   /***Trong nhà***/
-veTrucToaDo();
 }
 
 
@@ -294,14 +288,16 @@ veTrucToaDo();
 ***************/
 
 /** create object instances **/
-var tulip = new Tulip(38, 390, 150);
-var sunflower = new Sunflower(186, 390, 100);
-
+var tulip = new Tulip(38, 750, 150);
+var sunflower = new Sunflower(186, 750, 100);
+var house = new House(200, 400, 300);
 
 var drawScene = function() {
     background(207, 250, 255);
     tulip.draw();
+    house.draw();
     sunflower.draw();
+
 
 };
 
@@ -309,9 +305,7 @@ mouseClicked = function() {
     tulip.growBy(10);
     sunflower.growBy(20);
     drawScene();
-    veNha();
-
-
+    veTrucToaDo();
 };
 
 drawScene();
