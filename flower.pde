@@ -143,41 +143,12 @@ CucHoaMi.prototype.draw = function() {
   var x = this.x;
   var y = this.y;
   var cucHoaMi_thanCay_h = this.height;
-  translate(x, y);
-  //cánh hoa
-  // noStroke();
-  // fill(256, 256, 256);
-  // //4 cánh hoa vuông góc
-  // ellipse(0, -cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
-  // ellipse(0, cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
-  // ellipse(-cucHoaMi_size, 0, cucHoaMi_canhHoa_h, cucHoaMi_canhHoa_w);
-  // ellipse(cucHoaMi_size, 0, cucHoaMi_canhHoa_h, cucHoaMi_canhHoa_w);
-  // // // xoay 45 độ
-  // noStroke();
-  // fill(256, 256, 256);
-  // rotate(45);
-  // ellipse(0, -cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
-  // ellipse(0, cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
-  // ellipse(-cucHoaMi_size, 0, cucHoaMi_canhHoa_h, cucHoaMi_canhHoa_w);
-  // ellipse(cucHoaMi_size, 0, cucHoaMi_canhHoa_h, cucHoaMi_canhHoa_w);
-  // rotate(-45);
-  // // // xoay 90 độ
-  // rotate(90);
-  // ellipse(0, -cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
-  // ellipse(0, cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
-  // ellipse(-cucHoaMi_size, 0, cucHoaMi_canhHoa_h, cucHoaMi_canhHoa_w);
-  // ellipse(cucHoaMi_size, 0, cucHoaMi_canhHoa_h, cucHoaMi_canhHoa_w);
-  // rotate(-90);
-
-  translate(-x, -y);
 
   //thân hoa
   noStroke();
-  // //nhụy hoa
-  fill(255, 178, 102);
-  ellipse(this.x + 5, this.y - this.height, cucHoaMi_size, cucHoaMi_size);
   fill(16, 122, 12);
   rect(this.x, this.y, 10, -this.height);
+
   noStroke();
   fill(256, 256, 256);
   //4 cánh hoa vuông góc
@@ -187,15 +158,29 @@ CucHoaMi.prototype.draw = function() {
   ellipse(this.x + 5 + cucHoaMi_size,this.y - this.height, cucHoaMi_canhHoa_h, cucHoaMi_canhHoa_w);
 
   pushMatrix();
-  translate(width/2, height/2);
+  translate(this.x + 5, this.y - this.height);
   rotate(45);
-  ellipse(400, 300, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
-  ellipse(this.x + 5, this.y - this.height - cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
-  ellipse(this.x + 5, this.y - this.height + cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
-  ellipse(this.x + 5 - cucHoaMi_size,this.y - this.height, cucHoaMi_canhHoa_h, cucHoaMi_canhHoa_w);
-  ellipse(this.x + 5 + cucHoaMi_size,this.y - this.height, cucHoaMi_canhHoa_h, cucHoaMi_canhHoa_w);
-
+  ellipse(0, -cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
+  ellipse(0, cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
+  ellipse(0, cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
+  ellipse(-cucHoaMi_size, 0, cucHoaMi_canhHoa_h, cucHoaMi_canhHoa_w);
+  ellipse(cucHoaMi_size, 0, cucHoaMi_canhHoa_h, cucHoaMi_canhHoa_w);
   popMatrix();
+
+  pushMatrix();
+  translate(this.x + 5, this.y - this.height);
+  rotate(90);
+  ellipse(0, -cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
+  ellipse(0, cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
+  ellipse(0, cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
+  ellipse(-cucHoaMi_size, 0, cucHoaMi_canhHoa_h, cucHoaMi_canhHoa_w);
+  ellipse(cucHoaMi_size, 0, cucHoaMi_canhHoa_h, cucHoaMi_canhHoa_w);
+  popMatrix();
+
+  // //nhụy hoa
+  fill(255, 178, 102);
+  ellipse(this.x + 5, this.y - this.height, cucHoaMi_size, cucHoaMi_size);
+
 };
 
 CucHoaMi.prototype.growBy = function(amount) {
@@ -366,7 +351,7 @@ House.prototype.draw = function () {
 var tulip = new Tulip(38, 750, 150);
 var sunflower = new Sunflower(186, 750, 100);
 var house = new House(200, 400, 300);
-var cucHoaMi = new CucHoaMi(500, 550, 150);
+var cucHoaMi = new CucHoaMi(500, 750, 150);
 
 var drawScene = function() {
     background(207, 250, 255);
