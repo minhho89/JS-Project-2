@@ -187,6 +187,72 @@ CucHoaMi.prototype.growBy = function(amount) {
   this.height += amount;
 };
 
+/*********************
+*Hoa sen Object Type
+**********************/
+var HoaSen = function(x, y, height) {
+  this.x = x;
+  this.y = y;
+  this.height = height;
+}
+
+HoaSen.prototype.draw = function () {
+  //biến
+  var hoaSen_canhHoa_w = 30;
+  var hoaSen_canhHoa_h = 60;
+  var hoaSen_tamGiac_w = hoaSen_canhHoa_w/2 -2;
+  var hoaSen_tamGiac_x1 = this.x + 5 - hoaSen_tamGiac_w;
+  var hoaSen_tamGiac_y1 = this.y - this.height - 10;
+  var hoaSen_tamGiac_x2 = this.x + 5;
+  var hoaSen_tamGiac_y2 = this.y - this.height - hoaSen_canhHoa_h;
+  var hoaSen_tamGiac_x3 = this.x + 5 + hoaSen_tamGiac_w;
+
+  //thân hoa
+  noStroke();
+  fill(16, 122, 12);
+  rect(this.x, this.y, 10, -this.height);
+
+  //cánh hoa
+  noStroke();
+  // stroke(0);
+  fill(255, 51, 153);
+
+  triangle(hoaSen_tamGiac_x1, hoaSen_tamGiac_y1 - 5, hoaSen_tamGiac_x2, hoaSen_tamGiac_y2, hoaSen_tamGiac_x3, hoaSen_tamGiac_y1);
+  ellipse(this.x + 5, this.y - this.height - 5, hoaSen_canhHoa_w, hoaSen_canhHoa_h);
+
+  pushMatrix();
+  translate(this.x + 5 + hoaSen_canhHoa_w/2, this.y - this.height)
+  rotate(PI/4);
+  triangle(-hoaSen_canhHoa_w/3 , -20, 0, -50, hoaSen_canhHoa_w/3, -20);
+  ellipse(0, 0, hoaSen_canhHoa_w, hoaSen_canhHoa_h);
+  popMatrix();
+
+  pushMatrix();
+  translate(this.x + 5 - hoaSen_canhHoa_w/2, this.y - this.height)
+  rotate(-PI/4);
+  triangle(-hoaSen_canhHoa_w/3 , -20, 0, -50, hoaSen_canhHoa_w/3, -20);
+  ellipse(0, 0, hoaSen_canhHoa_w, hoaSen_canhHoa_h);
+  popMatrix();
+
+  pushMatrix();
+  translate(this.x + 5 + hoaSen_canhHoa_w/2, this.y - this.height + hoaSen_canhHoa_h/5)
+  rotate(PI/2);
+  triangle(-hoaSen_canhHoa_w/3 , -20, 0, -50, hoaSen_canhHoa_w/3, -20);
+  ellipse(0, 0, hoaSen_canhHoa_w, hoaSen_canhHoa_h);
+  popMatrix();
+
+  pushMatrix();
+  translate(this.x + 5 - hoaSen_canhHoa_w/2, this.y - this.height + hoaSen_canhHoa_h/5)
+  rotate(-PI/2);
+  triangle(-hoaSen_canhHoa_w/3 , -20, 0, -50, hoaSen_canhHoa_w/3, -20);
+  ellipse(0, 0, hoaSen_canhHoa_w, hoaSen_canhHoa_h);
+  popMatrix();
+
+};
+
+HoaSen.prototype.growBy = function(amount) {
+  this.height += amount;
+};
 /******************
 *House Object Type
 *******************/
@@ -352,21 +418,25 @@ var tulip = new Tulip(38, 750, 150);
 var sunflower = new Sunflower(186, 750, 100);
 var house = new House(200, 400, 300);
 var cucHoaMi = new CucHoaMi(500, 750, 150);
-
+var hoaSen = new HoaSen(700, 750, 150);
 var drawScene = function() {
     background(207, 250, 255);
     tulip.draw();
     house.draw();
     sunflower.draw();
     cucHoaMi.draw();
+    hoaSen.draw();
+
 };
 
 mouseClicked = function() {
     tulip.growBy(10);
     sunflower.growBy(20);
     cucHoaMi.growBy(5);
+    hoaSen.growBy(10);
     drawScene();
     veTrucToaDo();
+
 };
 
 drawScene();
