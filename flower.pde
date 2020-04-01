@@ -65,7 +65,6 @@ var veTrucToaDo = function () {
 *Flower Object Type
 *******************/
 
-
 /*****************
 *Tulip Object Type
 ******************/
@@ -104,11 +103,11 @@ var Sunflower = function(x, y, height) {
     this.x = x;
     this.y = y;
     this.height = height;
-};
+}
 
 Sunflower.prototype.draw = function() {
-    fill(16, 122, 12);
 
+    fill(16, 122, 12);
     rect(this.x, this.y, 10, -this.height);
 
     // petals
@@ -120,10 +119,72 @@ Sunflower.prototype.draw = function() {
     ellipse(this.x+20, this.y-this.height, 20, 18);
     fill(20, 20, 20);
     ellipse(this.x+5, this.y-this.height, 20, 20);
+
 };
 
 Sunflower.prototype.growBy = function(amount) {
     this.height += amount;
+};
+/*********************
+*Cúc họa mi Object Type
+**********************/
+var CucHoaMi = function(x, y, height) {
+  this.x = x;
+  this.y = y;
+  this.height = height;
+};
+
+CucHoaMi.prototype.draw = function() {
+
+  //Đặt Biến
+  var cucHoaMi_size = 25;
+  var cucHoaMi_canhHoa_w = cucHoaMi_size * 0.6;
+  var cucHoaMi_canhHoa_h = cucHoaMi_canhHoa_w * 2.67;
+  var x = this.x;
+  var y = this.y;
+  var cucHoaMi_thanCay_h = this.height;
+
+  //thân hoa
+  noStroke();
+  fill(16, 122, 12);
+  rect(this.x, this.y, 10, -this.height);
+
+  noStroke();
+  fill(256, 256, 256);
+  //4 cánh hoa vuông góc
+  ellipse(this.x + 5, this.y - this.height - cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
+  ellipse(this.x + 5, this.y - this.height + cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
+  ellipse(this.x + 5 - cucHoaMi_size,this.y - this.height, cucHoaMi_canhHoa_h, cucHoaMi_canhHoa_w);
+  ellipse(this.x + 5 + cucHoaMi_size,this.y - this.height, cucHoaMi_canhHoa_h, cucHoaMi_canhHoa_w);
+
+  pushMatrix();
+  translate(this.x + 5, this.y - this.height);
+  rotate(45);
+  ellipse(0, -cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
+  ellipse(0, cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
+  ellipse(0, cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
+  ellipse(-cucHoaMi_size, 0, cucHoaMi_canhHoa_h, cucHoaMi_canhHoa_w);
+  ellipse(cucHoaMi_size, 0, cucHoaMi_canhHoa_h, cucHoaMi_canhHoa_w);
+  popMatrix();
+
+  pushMatrix();
+  translate(this.x + 5, this.y - this.height);
+  rotate(90);
+  ellipse(0, -cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
+  ellipse(0, cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
+  ellipse(0, cucHoaMi_size, cucHoaMi_canhHoa_w, cucHoaMi_canhHoa_h);
+  ellipse(-cucHoaMi_size, 0, cucHoaMi_canhHoa_h, cucHoaMi_canhHoa_w);
+  ellipse(cucHoaMi_size, 0, cucHoaMi_canhHoa_h, cucHoaMi_canhHoa_w);
+  popMatrix();
+
+  // //nhụy hoa
+  fill(255, 178, 102);
+  ellipse(this.x + 5, this.y - this.height, cucHoaMi_size, cucHoaMi_size);
+
+};
+
+CucHoaMi.prototype.growBy = function(amount) {
+  this.height += amount;
 };
 
 /******************
@@ -219,7 +280,6 @@ House.prototype.draw = function () {
     *House Object Function
     *******************/
 
-
   /****Thân nhà****/
   noStroke();
   fill(232, 198, 165);
@@ -291,19 +351,20 @@ House.prototype.draw = function () {
 var tulip = new Tulip(38, 750, 150);
 var sunflower = new Sunflower(186, 750, 100);
 var house = new House(200, 400, 300);
+var cucHoaMi = new CucHoaMi(500, 750, 150);
 
 var drawScene = function() {
     background(207, 250, 255);
     tulip.draw();
     house.draw();
     sunflower.draw();
-
-
+    cucHoaMi.draw();
 };
 
 mouseClicked = function() {
     tulip.growBy(10);
     sunflower.growBy(20);
+    cucHoaMi.growBy(5);
     drawScene();
     veTrucToaDo();
 };
