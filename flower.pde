@@ -253,6 +253,45 @@ HoaSen.prototype.draw = function () {
 HoaSen.prototype.growBy = function(amount) {
   this.height += amount;
 };
+
+/*********************
+*Hoa artichoke Object Type
+**********************/
+var HoaArtichoke = function(x, y, height) {
+  this.x = x;
+  this.y = y;
+  this.height = height;
+};
+
+HoaArtichoke.prototype.draw = function () {
+  //biến
+  var hoaArtichoke_w = 60;
+  var hoaArtichoke_h = 20;
+
+  //thân hoa
+  noStroke();
+  fill(16, 122, 12);
+  rect(this.x, this.y, 10, -this.height);
+
+  stroke(0);
+  fill(0, 204, 0);
+
+  ellipse(this.x + 5, this.y - this.height, hoaArtichoke_w, hoaArtichoke_h);
+  //Tằng trên cùng
+  triangle(this.x + 5 - hoaArtichoke_w/2, this.y - this.height, this.x + 5, this.y - this.height - 70, this.x + 5 + hoaArtichoke_w/2, this.y - this.height)
+
+  //2 cánh tầng giữa
+  triangle(this.x + 5 - hoaArtichoke_w/2, this.y - this.height, this.x + 5 - hoaArtichoke_w/2 , this.y - this.height - 55, this.x + 5 + hoaArtichoke_w/2, this.y - this.height);
+  triangle(this.x + 5 - hoaArtichoke_w/2, this.y - this.height, this.x + 5 + hoaArtichoke_w/2 , this.y - this.height - 55, this.x + 5 + hoaArtichoke_w/2, this.y - this.height);
+
+  //2 cánh đế hoa
+  triangle(this.x + 5 - hoaArtichoke_w/2, this.y - this.height, this.x + 5 - hoaArtichoke_w/2 - 10, this.y - this.height - 40, this.x + 5, this.y - this.height);
+  triangle(this.x + 5, this.y - this.height, this.x + 5 + hoaArtichoke_w/2 + 10, this.y - this.height - 40, this.x + 5 + hoaArtichoke_w/2, this.y - this.height);
+};
+
+HoaArtichoke.prototype.growBy = function(amount) {
+  this.height += amount;
+};
 /******************
 *House Object Type
 *******************/
@@ -408,7 +447,6 @@ House.prototype.draw = function () {
   /***Trong nhà***/
 }
 
-
 /**************
 *MAIN PROGRAM
 ***************/
@@ -419,6 +457,7 @@ var sunflower = new Sunflower(186, 750, 100);
 var house = new House(200, 400, 300);
 var cucHoaMi = new CucHoaMi(500, 750, 150);
 var hoaSen = new HoaSen(700, 750, 150);
+var hoaArtichoke = new HoaArtichoke(300, 750, 150);
 var drawScene = function() {
     background(207, 250, 255);
     tulip.draw();
@@ -426,6 +465,7 @@ var drawScene = function() {
     sunflower.draw();
     cucHoaMi.draw();
     hoaSen.draw();
+    hoaArtichoke.draw();
 
 };
 
@@ -434,6 +474,7 @@ mouseClicked = function() {
     sunflower.growBy(20);
     cucHoaMi.growBy(5);
     hoaSen.growBy(10);
+    hoaArtichoke.growBy(20);
     drawScene();
     veTrucToaDo();
 
