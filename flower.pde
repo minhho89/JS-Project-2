@@ -30,11 +30,15 @@ var i = 0;
 var j = 0;
 // position of the flower
 var x = 10;
-
+//Chèn hình
+PImage hinh_nen;
+PImage grass_block; //cỏ
 void setup()
 {
   size(canvas_x ,canvas_y);
   background(125);
+  hinh_nen = loadImage("img/background.png");
+  grass_block = loadImage("img/grass-block2.png");
 }
 /*************
 * CÁC HÀM HỖ TRỢ
@@ -447,6 +451,8 @@ House.prototype.draw = function () {
   /***Trong nhà***/
 }
 
+
+
 /**************
 *MAIN PROGRAM
 ***************/
@@ -454,29 +460,51 @@ House.prototype.draw = function () {
 /** create object instances **/
 var tulip = new Tulip(38, 750, 150);
 var sunflower = new Sunflower(186, 750, 100);
-var house = new House(200, 400, 300);
+var house = new House(350, 500, 300);
 var cucHoaMi = new CucHoaMi(500, 750, 150);
 var hoaSen = new HoaSen(700, 750, 150);
 var hoaArtichoke = new HoaArtichoke(300, 750, 150);
+
+var draw_hinhnen = function() {
+  var hinh_nen_w = canvas_x;
+  var hinh_nen_h = 0.67 * hinh_nen_w
+  image (hinh_nen, 0, -100, hinh_nen_w, hinh_nen_h);
+};
+
+var draw_grass = function() {
+  for (i = canvas_y/2; i < canvas_y; i +=40){
+    for (j = 0; j < canvas_x; j += 50.5){
+        image(grass_block, j, i, 52, 45.5);
+    };//for j
+   };//for i
+   i = 0; j = 0;
+};
 var drawScene = function() {
     background(207, 250, 255);
-    tulip.draw();
+    draw = function() {
+    draw_hinhnen();
+    draw_grass();
+    };
+
     house.draw();
+    tulip.draw();
     sunflower.draw();
     cucHoaMi.draw();
     hoaSen.draw();
     hoaArtichoke.draw();
 
+    veTrucToaDo();
 };
 
 mouseClicked = function() {
+
     tulip.growBy(10);
     sunflower.growBy(20);
     cucHoaMi.growBy(5);
     hoaSen.growBy(10);
     hoaArtichoke.growBy(20);
+
     drawScene();
-    veTrucToaDo();
 
 };
 
