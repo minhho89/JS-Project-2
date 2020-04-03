@@ -4,10 +4,8 @@ Giao diện có màu sắc hài hoà, layout hợp lý và nội dung rõ ràng.
 Chúng ta sẽ có một ngôi nhà nhỏ xinh với 1 cửa chính và 2 cửa sổ
 Phía trước ngôi nhà là một vườn hoa với nhiều sắc màu chủng loại khác nhau
 Phía trên vẫn là bầu trời xanh mây trắng
-
 Yêu cầu chức năng cơ bản
 Vẽ một ngôi nhà nhiều hoa lá.
-
 Vẽ được ngôi nhà có cửa sổ cửa chính, có mái nhà, có lối vào nhà
 Phía trước nhà cần vẽ được vườn hoa
 Phía trên ngôi nhà là bầu trời và mây bay
@@ -31,14 +29,21 @@ var j = 0;
 // position of the flower
 var x = 10;
 //Chèn hình
-PImage hinh_nen;
+PImage hinh_nen; //hình nền
 PImage grass_block; //cỏ
+PImage hang_rao; // hàng rào;
+PImage ao_nuoc; //ao nước
+PImage via_he; //vỉa hè đá
+
 void setup()
 {
   size(canvas_x ,canvas_y);
   background(125);
-  hinh_nen = loadImage("img/background.png");
+  hinh_nen = loadImage("img/background.jpg");
   grass_block = loadImage("img/grass-block2.png");
+  hang_rao = loadImage("img/fence.png");
+  ao_nuoc = loadImage("img/pond.png")
+  via_he = loadImage("img/rock-pavement1 copy.png")
 }
 /*************
 * CÁC HÀM HỖ TRỢ
@@ -348,8 +353,8 @@ House.prototype.draw = function () {
     //Biến tay nắm
     var tayNam_w = cuaChinh_w / 10;
     var tayNam_h = cuaChinh_h / 9;
-    var tayNam_trai_x = thanNha_x + thanNha_x / 2 - thanNha_x / 28;
-    var tayNam_phai_x = thanNha_x + thanNha_x / 2 + thanNha_x / 28;
+    var tayNam_trai_x = thanNha_x + thanNha_w / 2 + thanNha_w / 28;
+    var tayNam_phai_x = thanNha_x + thanNha_w / 2 - thanNha_w / 28;
     var tayNam_y = cuaChinh_y + cuaChinh_h / 2 - tayNam_h /2;
 
     //Biến cửa sổ
@@ -450,23 +455,21 @@ House.prototype.draw = function () {
   /***Lồng đèn***/
   /***Trong nhà***/
 }
-
-
-
 /**************
 *MAIN PROGRAM
 ***************/
 
 /** create object instances **/
+
 var tulip = new Tulip(38, 750, 150);
 var sunflower = new Sunflower(186, 750, 100);
-var house = new House(350, 500, 300);
+var house = new House(450, 450, 300);
 var cucHoaMi = new CucHoaMi(500, 750, 150);
 var hoaSen = new HoaSen(700, 750, 150);
 var hoaArtichoke = new HoaArtichoke(300, 750, 150);
 
 var draw_hinhnen = function() {
-  var hinh_nen_w = canvas_x;
+  var hinh_nen_w = canvas_x + 200;
   var hinh_nen_h = 0.67 * hinh_nen_w
   image (hinh_nen, 0, -100, hinh_nen_w, hinh_nen_h);
 };
@@ -474,26 +477,44 @@ var draw_hinhnen = function() {
 var draw_grass = function() {
   for (i = canvas_y/2; i < canvas_y; i +=40){
     for (j = 0; j < canvas_x; j += 50.5){
-        image(grass_block, j, i, 52, 45.5);
+        image(grass_block, j, i, 52, 45.5); //cỏ
     };//for j
    };//for i
    i = 0; j = 0;
 };
-var drawScene = function() {
-    background(207, 250, 255);
-    draw = function() {
-    draw_hinhnen();
-    draw_grass();
+var draw_hangRao = function() {
+    for (i = -20; i < canvas_x; i += 90){
+      image(hang_rao, i, 350, 100, 59.42);
     };
+};//draw_fence loop
+var draw_aoNuoc = function() {
+  image(ao_nuoc, 50, 500, 400, 173.94);
+};
+var draw_viahe = function() {
+  for (i = 550; i < 650; i += 100) {
+    for (j = 490; j < canvas_y; j += 50){
+    image(via_he, i, j, 100, 50);
+    };
+  }
+};
+var drawScene = function() {
+    // background(207, 250, 255);
+    draw = function() {
+      draw_hinhnen();
+      draw_hangRao();
+      draw_grass();
+      draw_aoNuoc();
+      draw_viahe();
 
-    house.draw();
-    tulip.draw();
-    sunflower.draw();
-    cucHoaMi.draw();
-    hoaSen.draw();
-    hoaArtichoke.draw();
+      house.draw();
+      tulip.draw();
+      sunflower.draw();
+      cucHoaMi.draw();
+      hoaSen.draw();
+      hoaArtichoke.draw();
 
-    veTrucToaDo();
+      veTrucToaDo();
+    };
 };
 
 mouseClicked = function() {
