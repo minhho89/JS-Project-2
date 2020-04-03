@@ -146,7 +146,7 @@ var CucHoaMi = function(x, y, height) {
 CucHoaMi.prototype.draw = function() {
 
   //Đặt Biến
-  var cucHoaMi_size = 25;
+  var cucHoaMi_size = 10;
   var cucHoaMi_canhHoa_w = cucHoaMi_size * 0.6;
   var cucHoaMi_canhHoa_h = cucHoaMi_canhHoa_w * 2.67;
   var x = this.x;
@@ -461,12 +461,7 @@ House.prototype.draw = function () {
 
 /** create object instances **/
 
-var tulip = new Tulip(38, 750, 150);
-var sunflower = new Sunflower(186, 750, 100);
 var house = new House(450, 450, 300);
-var cucHoaMi = new CucHoaMi(500, 750, 150);
-var hoaSen = new HoaSen(700, 750, 150);
-var hoaArtichoke = new HoaArtichoke(300, 750, 150);
 
 var draw_hinhnen = function() {
   var hinh_nen_w = canvas_x + 200;
@@ -497,6 +492,43 @@ var draw_viahe = function() {
     };
   }
 };
+
+// Vẽ hoa
+int numTulips = random(5, 10);
+Tulip[] tulips = new Tulip[numTulips];
+for (int i = 0; i < numTulips; i++){
+  tulips[i] = new Tulip(random(50, 400), random(450, 450), random(50, 100));
+}
+
+int numSunflowers = random(5, 10);
+Sunflower[] sunflowers = new Sunflower[numSunflowers];
+for(int i = 0; i < numSunflowers; i++){
+  sunflowers[i] = new Sunflower(random(50, 500), random(750, 780), random(50, 100));
+}
+
+int numCucHoaMi = random(10, 30);
+CucHoaMi[] cucHoaMi = new CucHoaMi[numCucHoaMi];
+for(int i = 0; i < numCucHoaMi; i++){
+  cucHoaMi[i] = new CucHoaMi(random(500, 550), random(500, 750), random(5, 10));
+}
+int numCucHoaMi_right = random(10, 30);
+CucHoaMi[] cucHoaMi_right = new CucHoaMi[numCucHoaMi];
+for(int i = 0; i < numCucHoaMi_right; i++){
+  cucHoaMi_right[i] = new CucHoaMi(random(650, 700), random(500, 750), random(5, 10));
+}
+
+int numHoaSen = random(1, 3);
+HoaSen[] hoaSen = new HoaSen[numHoaSen];
+for(i = 0; i < numHoaSen; i++){
+  hoaSen[i] = new HoaSen(random(60,390), random(590, 640), random(10, 20));
+}
+
+int numHoaArtichoke = random(5, 10);
+HoaArtichoke[] hoaArtichoke = new HoaArtichoke[numHoaArtichoke];
+for(i = 0; i < numHoaArtichoke; i++){
+  hoaArtichoke[i] = new HoaArtichoke(random(50, 500), random(500, 550), random (10, 30));
+}
+
 var drawScene = function() {
     // background(207, 250, 255);
     draw = function() {
@@ -507,23 +539,48 @@ var drawScene = function() {
       draw_viahe();
 
       house.draw();
-      tulip.draw();
-      sunflower.draw();
-      cucHoaMi.draw();
-      hoaSen.draw();
-      hoaArtichoke.draw();
 
+      for (int i = 0; i < numTulips; i++){
+        tulips[i].draw();
+      };
+      for (int i = 0; i < numHoaArtichoke; i++){
+        hoaArtichoke[i].draw();
+      };
+      for (int i = 0; i < numHoaSen; i++){
+        hoaSen[i].draw();
+      }
+      for (int i = 0; i < numSunflowers; i++){
+        sunflowers[i].draw();
+      };
+      for (int i = 0; i < numCucHoaMi; i++){
+        cucHoaMi[i].draw();
+      };
+      for (int i = 0; i < numCucHoaMi_right; i++){
+        cucHoaMi_right[i].draw();
+      };
       veTrucToaDo();
     };
 };
 
 mouseClicked = function() {
-
-    tulip.growBy(10);
-    sunflower.growBy(20);
-    cucHoaMi.growBy(5);
-    hoaSen.growBy(10);
-    hoaArtichoke.growBy(20);
+  for (int i = 0; i < numTulips; i++){
+    tulips[i].growBy(random(10, 20));
+  };
+  for (int i = 0; i < numHoaSen; i++){
+    hoaSen[i].growBy(random(10, 20));
+  }
+  for (int i = 0; i < numSunflowers; i++){
+    sunflowers[i].growBy(random(10, 20));
+  };
+  for (int i = 0; i < numHoaArtichoke; i++){
+    hoaArtichoke[i].growBy(random(20, 30));
+  };
+  for (int i = 0; i < numCucHoaMi; i++){
+    cucHoaMi[i].growBy(random(10, 15));
+  };
+  for (int i = 0; i < numCucHoaMi_right; i++){
+    cucHoaMi_right[i].growBy(random(10, 15));
+  };
 
     drawScene();
 
