@@ -83,6 +83,7 @@ var Tulip = function(x, y, height) {
     this.x = x;
     this.y = y;
     this.height = height;
+    Tulip_size = 44;
 };
 
 Tulip.prototype.draw = function() {
@@ -578,24 +579,42 @@ var drawScene = function() {
       house.draw();
 
       for (int i = 0; i < numTulips; i++){
+        stroke(0);
+        fill(0,0,0,0);
+        rect(tulips[i].x + 5 - 44,tulips[i].y - tulips[i].height - 44, 88,88);
+
         tulips[i].draw();
+
       };
       for (int i = 0; i < numHoaArtichoke; i++){
+        noStroke();
         hoaArtichoke[i].draw();
+        textSize(20);
+        fill(255);
+        text("x1 = " + (tulips[i].x + 5 - 44).toFixed(2)+"; "+"x2 = " + (tulips[i].x + 5 + 44).toFixed(2) , tulips[i].x + 5 - 44,tulips[i].y - tulips[i].height - 80);
+
+        text("y1 = +"+ (tulips[i].y - tulips[i].height - 44).toFixed(2) + "; " + "y2 = " + ((tulips[i].y - tulips[i].height)+44).toFixed(2), tulips[i].x + 5 - 44,tulips[i].y - tulips[i].height - 50);
       };
       for (int i = 0; i < numHoaSen; i++){
+        noStroke();
         hoaSen[i].draw();
       }
       for (int i = 0; i < numSunflowers; i++){
+        noStroke();
         sunflowers[i].draw();
       };
       for (int i = 0; i < numCucHoaMi; i++){
+        noStroke();
         cucHoaMi[i].draw();
       };
       for (int i = 0; i < numCucHoaMi_right; i++){
+        noStroke();
         cucHoaMi_right[i].draw();
       };
-    };
+      textSize(20);
+      veTrucToaDo();
+    };//draw
+
 };
 
 mouseClicked = function() {
@@ -604,7 +623,8 @@ mouseClicked = function() {
   for(int i = 0; i < numTulips; i++){
       if (tulips[i].x + 5 - 44 < mouseX &&  mouseX < tulips[i].x + 5 + 44){
         if((tulips[i].y - tulips[i].height - 44) < mouseY && mouseY < ((tulips[i].y - tulips[i].height)+44)){
-        tulips[i].growBy(random(10, 20))
+
+        tulips[i].growBy(random(20, 40));
         }
       }
     }
