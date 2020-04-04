@@ -625,7 +625,7 @@ mouseClicked = function() {
         }
       }
     }
-    hoaSen[1].growBy(40);
+
   //Hoa Hướng Dương
   for(int i = 0; i < numSunflowers; i++){
       if (sunflowers[i].x +5 - 30 < mouseX &&  mouseX < sunflowers[i].x +5 + 30){
