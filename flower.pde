@@ -34,6 +34,7 @@ PImage grass_block; //cỏ
 PImage hang_rao; // hàng rào;
 PImage ao_nuoc; //ao nước
 PImage via_he; //vỉa hè đá
+PImage cloud; //mây bay
 
 void setup()
 {
@@ -44,6 +45,7 @@ void setup()
   hang_rao = loadImage("img/fence.png");
   ao_nuoc = loadImage("img/pond.png")
   via_he = loadImage("img/rock-pavement1 copy.png")
+  cloud = loadImage("img/cloud2.png")
 }
 /*************
 * CÁC HÀM HỖ TRỢ
@@ -301,6 +303,27 @@ HoaArtichoke.prototype.draw = function () {
 HoaArtichoke.prototype.growBy = function(amount) {
   this.height += amount;
 };
+
+
+/*********************
+*Cloud Object Type
+**********************/
+
+int numCloud = random(0,4);
+var cloud_x = [random(0, 700)];
+var cloud_y = [random(20, 150)];
+var cloud_w = [random(30, 100)];
+var cloud_h = [(605/1260) * cloud_w];
+
+draw_cloud = function(){
+    for(int i = 0; i < numCloud; i++){
+    cloud_x[i] = random(0, 700);
+    cloud_y[i] = random(20, 150);
+    cloud_w[i] = random(30, 100);
+    cloud_h[i] = ((605/1260) * cloud_w);
+  }
+}
+
 /******************
 *House Object Type
 *******************/
@@ -493,46 +516,55 @@ var draw_viahe = function() {
   }
 };
 
-// Vẽ hoa
-int numTulips = random(5, 10);
-Tulip[] tulips = new Tulip[numTulips];
-for (int i = 0; i < numTulips; i++){
-  tulips[i] = new Tulip(random(50, 400), random(450, 450), random(50, 100));
-}
-
-int numSunflowers = random(5, 10);
-Sunflower[] sunflowers = new Sunflower[numSunflowers];
-for(int i = 0; i < numSunflowers; i++){
-  sunflowers[i] = new Sunflower(random(50, 500), random(750, 780), random(50, 100));
-}
-
-int numCucHoaMi = random(10, 30);
-CucHoaMi[] cucHoaMi = new CucHoaMi[numCucHoaMi];
-for(int i = 0; i < numCucHoaMi; i++){
-  cucHoaMi[i] = new CucHoaMi(random(500, 550), random(500, 750), random(5, 10));
-}
-int numCucHoaMi_right = random(10, 30);
-CucHoaMi[] cucHoaMi_right = new CucHoaMi[numCucHoaMi];
-for(int i = 0; i < numCucHoaMi_right; i++){
-  cucHoaMi_right[i] = new CucHoaMi(random(650, 700), random(500, 750), random(5, 10));
-}
-
-int numHoaSen = random(1, 3);
-HoaSen[] hoaSen = new HoaSen[numHoaSen];
-for(i = 0; i < numHoaSen; i++){
-  hoaSen[i] = new HoaSen(random(60,390), random(590, 640), random(10, 20));
-}
-
-int numHoaArtichoke = random(5, 10);
-HoaArtichoke[] hoaArtichoke = new HoaArtichoke[numHoaArtichoke];
-for(i = 0; i < numHoaArtichoke; i++){
-  hoaArtichoke[i] = new HoaArtichoke(random(50, 500), random(500, 550), random (10, 30));
-}
+/**********************
+/// Vẽ hoa
+*********************/
+    //Tulips
+    int numTulips = random(4,9);
+    Tulip[] tulips = new Tulip[numTulips];
+    for (int i = 0; i < numTulips; i++){
+      tulips[i] = new Tulip(random(50, 400), random(450, 450), random(50, 100));
+    }
+    //Sunflowrs
+    int numSunflowers = random(4, 9);
+    Sunflower[] sunflowers = new Sunflower[numSunflowers];
+    for(int i = 0; i < numSunflowers; i++){
+      sunflowers[i] = new Sunflower(random(50, 500), random(750, 780), random(50, 100));
+    }
+    // Cúc họa mi bên trái và bên phải đường đi
+    int numCucHoaMi = random(10, 30);
+    CucHoaMi[] cucHoaMi = new CucHoaMi[numCucHoaMi];
+    for(int i = 0; i < numCucHoaMi; i++){
+      cucHoaMi[i] = new CucHoaMi(random(500, 550), random(500, 750), random(5, 10));
+    }
+    int numCucHoaMi_right = random(10, 30);
+    CucHoaMi[] cucHoaMi_right = new CucHoaMi[numCucHoaMi_right];
+    for(int i = 0; i < numCucHoaMi_right; i++){
+      cucHoaMi_right[i] = new CucHoaMi(random(650, 700), random(500, 750), random(5, 10));
+    }
+    // Hoa sen mọc trong ao
+    int numHoaSen = random(1, 3);
+    HoaSen[] hoaSen = new HoaSen[numHoaSen];
+    for(i = 0; i < numHoaSen; i++){
+      hoaSen[i] = new HoaSen(random(60,390), random(590, 640), random(10, 20));
+    }
+    //Hoa Artichoke
+    int numHoaArtichoke = random(4, 9);
+    HoaArtichoke[] hoaArtichoke = new HoaArtichoke[numHoaArtichoke];
+    for(i = 0; i < numHoaArtichoke; i++){
+      hoaArtichoke[i] = new HoaArtichoke(random(50, 500), random(500, 550), random (10, 30));
+    }
 
 var drawScene = function() {
     // background(207, 250, 255);
     draw = function() {
       draw_hinhnen();
+
+      //vẽ mây
+      for(i = 0; i < numCloud; i++){
+        image(cloud, cloud_x[i], cloud_y[i], cloud_w[i], cloud_h[i]);
+      }
+
       draw_hangRao();
       draw_grass();
       draw_aoNuoc();
@@ -558,29 +590,63 @@ var drawScene = function() {
       for (int i = 0; i < numCucHoaMi_right; i++){
         cucHoaMi_right[i].draw();
       };
+
       veTrucToaDo();
     };
+
 };
 
 mouseClicked = function() {
-  for (int i = 0; i < numTulips; i++){
-    tulips[i].growBy(random(10, 20));
-  };
-  for (int i = 0; i < numHoaSen; i++){
-    hoaSen[i].growBy(random(10, 20));
-  }
-  for (int i = 0; i < numSunflowers; i++){
-    sunflowers[i].growBy(random(10, 20));
-  };
-  for (int i = 0; i < numHoaArtichoke; i++){
-    hoaArtichoke[i].growBy(random(20, 30));
-  };
-  for (int i = 0; i < numCucHoaMi; i++){
-    cucHoaMi[i].growBy(random(10, 15));
-  };
-  for (int i = 0; i < numCucHoaMi_right; i++){
-    cucHoaMi_right[i].growBy(random(10, 15));
-  };
+//Khi click vào phạm vi đóa hoa thì hoa sẽ mọc cao lên
+  //Tulips
+  for(int i = 0; i < numTulips; i++){
+      if (tulips[i].x - 20 < mouseX &&  mouseX < tulips[i].x + 20){
+        if((tulips[i].y - tulips[i].height - 30) < mouseY && mouseY < ((tulips[i].y - tulips[i].height)+20)){
+        tulips[i].growBy(random(10, 20))
+        }
+      }
+    }
+
+  //Aritchoke
+  for(int i = 0; i < numHoaArtichoke; i++){
+      if (hoaArtichoke[i].x - 20 < mouseX &&  mouseX < hoaArtichoke[i].x + 20){
+        if((hoaArtichoke[i].y - hoaArtichoke[i].height - 30) < mouseY && mouseY < ((hoaArtichoke[i].y - hoaArtichoke[i].height)+20)){
+        hoaArtichoke[i].growBy(random(10, 20))
+        }
+      }
+    }
+  //Hoa sen
+  for(int i = 0; i < numHoaSen; i++){
+      if (hoaSen[i].x - 20 < mouseX &&  mouseX < hoaSen[i].x + 20){
+        if((hoaSen[i].y - hoaSen[i].height - 30) < mouseY && mouseY < ((hoaSen[i].y - hoaSen[i].height)+20)){
+        hoaSen[i].growBy(random(10, 20))
+        }
+      }
+    }
+  //Hoa Hướng Dương
+  for(int i = 0; i < numSunflowers; i++){
+      if (sunflowers[i].x - 20 < mouseX &&  mouseX < sunflowers[i].x + 20){
+        if((sunflowers[i].y - sunflowers[i].height - 30) < mouseY && mouseY < ((sunflowers[i].y - sunflowers[i].height)+20)){
+        sunflowers[i].growBy(random(10, 20))
+        }
+      }
+    }
+    //Cúc họa mi trái và phải đường đi
+    for(int i = 0; i < numCucHoaMi; i++){
+        if (cucHoaMi[i].x - 20 < mouseX &&  mouseX < cucHoaMi[i].x + 20){
+          if((cucHoaMi[i].y - cucHoaMi[i].height - 30) < mouseY && mouseY < ((cucHoaMi[i].y - cucHoaMi[i].height)+20)){
+          cucHoaMi[i].growBy(random(10, 15))
+          }
+        }
+      }
+
+    for(int i = 0; i < numCucHoaMi_right; i++){
+        if (cucHoaMi_right[i].x - 20 < mouseX &&  mouseX < cucHoaMi_right[i].x + 20){
+          if((cucHoaMi_right[i].y - cucHoaMi_right[i].height - 30) < mouseY && mouseY < ((cucHoaMi_right[i].y - cucHoaMi_right[i].height)+20)){
+          cucHoaMi_right[i].growBy(random(10, 20))
+          }
+        }
+      }
 
     drawScene();
 
