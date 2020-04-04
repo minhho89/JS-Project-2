@@ -4,10 +4,8 @@ Giao diện có màu sắc hài hoà, layout hợp lý và nội dung rõ ràng.
 Chúng ta sẽ có một ngôi nhà nhỏ xinh với 1 cửa chính và 2 cửa sổ
 Phía trước ngôi nhà là một vườn hoa với nhiều sắc màu chủng loại khác nhau
 Phía trên vẫn là bầu trời xanh mây trắng
-
 Yêu cầu chức năng cơ bản
 Vẽ một ngôi nhà nhiều hoa lá.
-
 Vẽ được ngôi nhà có cửa sổ cửa chính, có mái nhà, có lối vào nhà
 Phía trước nhà cần vẽ được vườn hoa
 Phía trên ngôi nhà là bầu trời và mây bay
@@ -30,11 +28,24 @@ var i = 0;
 var j = 0;
 // position of the flower
 var x = 10;
+//Chèn hình
+PImage hinh_nen; //hình nền
+PImage grass_block; //cỏ
+PImage hang_rao; // hàng rào;
+PImage ao_nuoc; //ao nước
+PImage via_he; //vỉa hè đá
+PImage cloud; //mây bay
 
 void setup()
 {
   size(canvas_x ,canvas_y);
   background(125);
+  hinh_nen = loadImage("img/background2.jpg");
+  grass_block = loadImage("img/grass-block2.png");
+  hang_rao = loadImage("img/fence.png");
+  ao_nuoc = loadImage("img/pond.png")
+  via_he = loadImage("img/rock-pavement1 copy.png")
+  cloud = loadImage("img/cloud2.png")
 }
 /*************
 * CÁC HÀM HỖ TRỢ
@@ -137,9 +148,9 @@ var CucHoaMi = function(x, y, height) {
 CucHoaMi.prototype.draw = function() {
 
   //Đặt Biến
-  var cucHoaMi_size = 25;
-  var cucHoaMi_canhHoa_w = cucHoaMi_size * 0.6;
-  var cucHoaMi_canhHoa_h = cucHoaMi_canhHoa_w * 2.67;
+  var cucHoaMi_size = 10;
+  var cucHoaMi_canhHoa_w = cucHoaMi_size * 0.6;//6
+  var cucHoaMi_canhHoa_h = cucHoaMi_canhHoa_w * 2.67;// 16.02
   var x = this.x;
   var y = this.y;
   var cucHoaMi_thanCay_h = this.height;
@@ -292,6 +303,27 @@ HoaArtichoke.prototype.draw = function () {
 HoaArtichoke.prototype.growBy = function(amount) {
   this.height += amount;
 };
+
+
+/*********************
+*Cloud Object Type
+**********************/
+
+int numCloud = round(random(7,15));
+var cloud_x = [random(0, 700)];
+var cloud_y = [random(0, 650)];
+var cloud_w = [random(200, 300)];
+var cloud_h = [(605/1260) * cloud_w[0]];
+
+draw_cloud = function(){
+    for(i = 0; i < numCloud; i++){
+    cloud_x.push(random(0, 700));
+    cloud_y.push(random(20, 150));
+    cloud_w.push(random(200, 300));
+    cloud_h.push((605/1260) * cloud_w[i+1]);
+  }
+}
+
 /******************
 *House Object Type
 *******************/
@@ -344,8 +376,8 @@ House.prototype.draw = function () {
     //Biến tay nắm
     var tayNam_w = cuaChinh_w / 10;
     var tayNam_h = cuaChinh_h / 9;
-    var tayNam_trai_x = thanNha_x + thanNha_x / 2 - thanNha_x / 28;
-    var tayNam_phai_x = thanNha_x + thanNha_x / 2 + thanNha_x / 28;
+    var tayNam_trai_x = thanNha_x + thanNha_w / 2 + thanNha_w / 28;
+    var tayNam_phai_x = thanNha_x + thanNha_w / 2 - thanNha_w / 28;
     var tayNam_y = cuaChinh_y + cuaChinh_h / 2 - tayNam_h /2;
 
     //Biến cửa sổ
@@ -446,37 +478,180 @@ House.prototype.draw = function () {
   /***Lồng đèn***/
   /***Trong nhà***/
 }
-
 /**************
 *MAIN PROGRAM
 ***************/
 
 /** create object instances **/
-var tulip = new Tulip(38, 750, 150);
-var sunflower = new Sunflower(186, 750, 100);
-var house = new House(200, 400, 300);
-var cucHoaMi = new CucHoaMi(500, 750, 150);
-var hoaSen = new HoaSen(700, 750, 150);
-var hoaArtichoke = new HoaArtichoke(300, 750, 150);
-var drawScene = function() {
-    background(207, 250, 255);
-    tulip.draw();
-    house.draw();
-    sunflower.draw();
-    cucHoaMi.draw();
-    hoaSen.draw();
-    hoaArtichoke.draw();
 
+var house = new House(450, 450, 300);
+
+var draw_hinhnen = function() {
+  var hinh_nen_w = canvas_x + 200;
+  var hinh_nen_h = 0.67 * hinh_nen_w
+  image (hinh_nen, 0, -100, hinh_nen_w, hinh_nen_h);
+};
+
+var draw_grass = function() {
+  for (i = canvas_y/2; i < canvas_y; i +=40){
+    for (j = 0; j < canvas_x; j += 50.5){
+        image(grass_block, j, i, 52, 45.5); //cỏ
+    };//for j
+   };//for i
+   i = 0; j = 0;
+};
+var draw_hangRao = function() {
+    for (i = -20; i < canvas_x; i += 90){
+      image(hang_rao, i, 350, 100, 59.42);
+    };
+};//draw_fence loop
+var draw_aoNuoc = function() {
+  image(ao_nuoc, 50, 500, 400, 173.94);
+};
+var draw_viahe = function() {
+  for (i = 550; i < 650; i += 100) {
+    for (j = 490; j < canvas_y; j += 50){
+    image(via_he, i, j, 100, 50);
+    };
+  }
+};
+
+/**********************
+/// Vẽ hoa
+*********************/
+    //Tulips
+    int numTulips = random(4,9);
+    Tulip[] tulips = new Tulip[numTulips];
+    for (int i = 0; i < numTulips; i++){
+      tulips[i] = new Tulip(random(50, 400), random(450, 450), random(50, 100));
+    }
+    //Sunflowrs
+    int numSunflowers = random(5, 10);
+    Sunflower[] sunflowers = new Sunflower[numSunflowers];
+    for(int i = 0; i < numSunflowers; i++){
+      sunflowers[i] = new Sunflower(random(50, 500), random(750, 780), random(50, 100));
+    }
+    // Cúc họa mi bên trái và bên phải đường đi
+    int numCucHoaMi = random(10, 30);
+    CucHoaMi[] cucHoaMi = new CucHoaMi[numCucHoaMi];
+    for(int i = 0; i < numCucHoaMi; i++){
+      cucHoaMi[i] = new CucHoaMi(random(500, 550), random(500, 750), random(5, 10));
+    }
+    int numCucHoaMi_right = random(10, 30);
+    CucHoaMi[] cucHoaMi_right = new CucHoaMi[numCucHoaMi_right];
+    for(int i = 0; i < numCucHoaMi_right; i++){
+      cucHoaMi_right[i] = new CucHoaMi(random(650, 700), random(500, 750), random(5, 10));
+    }
+    // Hoa sen mọc trong ao
+    int numHoaSen = random(1, 3);
+    HoaSen[] hoaSen = new HoaSen[numHoaSen];
+    for(i = 0; i < numHoaSen; i++){
+      hoaSen[i] = new HoaSen(random(60,390), random(590, 640), random(10, 20));
+    }
+    //Hoa Artichoke
+    int numHoaArtichoke = random(4, 9);
+    HoaArtichoke[] hoaArtichoke = new HoaArtichoke[numHoaArtichoke];
+    for(i = 0; i < numHoaArtichoke; i++){
+      hoaArtichoke[i] = new HoaArtichoke(random(50, 500), random(500, 550), random (10, 30));
+    }
+
+var drawScene = function() {
+    // background(207, 250, 255);
+    draw = function() {
+      draw_hinhnen();
+
+      //vẽ mây
+      draw_cloud();
+      for(i = 0; i < numCloud; i++){
+        image(cloud, cloud_x[i], cloud_y[i], cloud_w[i], cloud_h[i]);
+        cloud_x[i] += 0.3;
+        if(cloud_x[i] > canvas_x){
+          cloud_x[i] = -5;
+        }
+      }
+
+      draw_hangRao();
+      draw_grass();
+      draw_aoNuoc();
+      draw_viahe();
+
+      house.draw();
+
+      for (int i = 0; i < numTulips; i++){
+        tulips[i].draw();
+      };
+      for (int i = 0; i < numHoaArtichoke; i++){
+        hoaArtichoke[i].draw();
+      };
+      for (int i = 0; i < numHoaSen; i++){
+        hoaSen[i].draw();
+      }
+      for (int i = 0; i < numSunflowers; i++){
+        sunflowers[i].draw();
+      };
+      for (int i = 0; i < numCucHoaMi; i++){
+        cucHoaMi[i].draw();
+      };
+      for (int i = 0; i < numCucHoaMi_right; i++){
+        cucHoaMi_right[i].draw();
+      };
+    };
 };
 
 mouseClicked = function() {
-    tulip.growBy(10);
-    sunflower.growBy(20);
-    cucHoaMi.growBy(5);
-    hoaSen.growBy(10);
-    hoaArtichoke.growBy(20);
+//Khi click vào phạm vi đóa hoa thì hoa sẽ mọc cao lên
+  //Tulips
+  for(int i = 0; i < numTulips; i++){
+      if (tulips[i].x + 5 - 44 < mouseX &&  mouseX < tulips[i].x + 5 + 44){
+        if((tulips[i].y - tulips[i].height - 44) < mouseY && mouseY < ((tulips[i].y - tulips[i].height)+44)){
+        tulips[i].growBy(random(10, 20))
+        }
+      }
+    }
+
+  //Aritchoke
+  for(int i = 0; i < numHoaArtichoke; i++){
+      if (hoaArtichoke[i].x - 40 < mouseX &&  mouseX < hoaArtichoke[i].x + 40){
+        if((hoaArtichoke[i].y - hoaArtichoke[i].height - 60) < mouseY && mouseY < ((hoaArtichoke[i].y - hoaArtichoke[i].height)+60)){
+        hoaArtichoke[i].growBy(random(10, 20))
+        }
+      }
+    }
+  //Hoa sen
+  for(int i = 0; i < numHoaSen; i++){
+      if (hoaSen[i].x - 60 < mouseX &&  mouseX < hoaSen[i].x + 60){
+        if((hoaSen[i].y - hoaSen[i].height - 60) < mouseY && mouseY < ((hoaSen[i].y - hoaSen[i].height)+ 60)){
+        hoaSen[i].growBy(random(10, 20))
+        }
+      }
+    }
+
+  //Hoa Hướng Dương
+  for(int i = 0; i < numSunflowers; i++){
+      if (sunflowers[i].x +5 - 30 < mouseX &&  mouseX < sunflowers[i].x +5 + 30){
+        if((sunflowers[i].y - sunflowers[i].height) + 10 < mouseY && mouseY < ((sunflowers[i].y - sunflowers[i].height) + 80)){
+        sunflowers[i].growBy(random(10, 20))
+        }
+      }
+    }
+    //Cúc họa mi trái và phải đường đi
+    for(int i = 0; i < numCucHoaMi; i++){
+        if (cucHoaMi[i].x + 10 < mouseX &&  mouseX < cucHoaMi[i].x + 5 + 55){
+          if((cucHoaMi[i].y - cucHoaMi[i].height - 5) < mouseY && mouseY < ((cucHoaMi[i].y - cucHoaMi[i].height) + 40)){
+          cucHoaMi[i].growBy(random(10, 15))
+          }
+        }
+      }
+
+    for(int i = 0; i < numCucHoaMi_right; i++){
+        if (cucHoaMi_right[i].x - 10 < mouseX &&  mouseX < cucHoaMi_right[i].x + 5 + 55){
+          if((cucHoaMi_right[i].y - cucHoaMi_right[i].height + 10) < mouseY && mouseY < ((cucHoaMi_right[i].y - cucHoaMi_right[i].height) + 60)){
+          cucHoaMi_right[i].growBy(random(10, 15))
+          }
+        }
+      }
+
     drawScene();
-    veTrucToaDo();
 
 };
 
