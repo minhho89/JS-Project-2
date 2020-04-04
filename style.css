@@ -1,0 +1,45 @@
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap');
+
+body {
+  background-color: #0c486c;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  }
+
+.navbar-brand {
+  font-family: 'Pacifico', cursive;
+  color: yellow !important;
+}
+
+.jumbotron {
+  color: #0c486c;
+}
+.bg-grey {
+  background-color: grey;
+}
+
+canvas {
+  width: 100%;
+}
+
+footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-family: 'Source Code Pro', monospace;
+  background-color: grey;
+  width: 100%;
+}
+footer br {
+  content: "";
+  margin: 2em;
+  display: block;
+  font-size: 24%;
+
+}
+
+#wCanvas {
+  max-width: 900px;
+}

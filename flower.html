@@ -1,13 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <title>Funix-games | Ngôi nhà trên núi</title>
 </head>
 <body>
-  <script src="processing.js"></script>
-  <canvas data-processing-sources="flower.pde"></canvas>
+  <!-- Start Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <a class="navbar-brand" href="#">Free-Games.Funix</a>
+  </nav>
+  <!-- End Navbar -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>Ngôi nhà trên núi cao</h1>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="jumbotron">
+        <p1>Chào mừng bạn đến với <span id="tua-game">Ngôi nhà trên núi cao</span>!</p1>
+        <br><br>
+        <p>Hãy bật một bản nhạc yêu thích, pha tách cà phê và tận hưởng không khí trong lành và mát mẻ trên cao nguyên lộng gió.</p>
+        <p> Bên dưới bầu trời xanh và những đám mây bay là căn nhà và khu vườn mơ ước.</p>
+        <p>Ở đây bạn có sẵn một vườn hoa với Tulip đỏ hướng về phía núi, trước đó là một hàng hoa Artichoke mang hơi thở của núi rừng. Ngoài ra, có một ao nước nhỏ trồng sen được lựa chọn kỹ lưỡng từng bông một từ vùng Đồng Tháp Mười. Ngoài ra bạn có một hàng rào hoa hướng dương chào đón và cúc họa mi mọc ven 2 đường lối nhỏ vào nhà.</p>
+        <p> Mẹo: Hãy thử bấm vào các bông hoa xem, chúng sẽ lớn rất nhanh đấy! Mỗi lần bạn refresh trang thì số lượng và vị trí hoa cũng thay đổi một cách ngẫu nhiên.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid" id="wCanvas">
+    <div class="col-12">
+      <script src="processing.js"></script>
+      <canvas data-processing-sources="flower.pde"></canvas>
+  </div>
+  </div>
+
+
+<div class="container-fluid bg-grey">
+    <footer>
+      <div class="row">
+        <div class="col-12">
+          <h3>Đại học trực tuyến FUNIX</h3>
+          <p>Môn: PRF192x_03_VN Xây dựng phần mềm đầu tiên </p><br>
+          <p>Tác giả: Hồ Nhật Minh - FX03283</p><br>
+          <p>Email: minhhnfx03283@funix.edu.vn</p>
+        </div>
+      </div>
+    </footer>
+</div>
+
 </body>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </html>

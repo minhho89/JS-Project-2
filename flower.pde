@@ -149,8 +149,8 @@ CucHoaMi.prototype.draw = function() {
 
   //Đặt Biến
   var cucHoaMi_size = 10;
-  var cucHoaMi_canhHoa_w = cucHoaMi_size * 0.6;
-  var cucHoaMi_canhHoa_h = cucHoaMi_canhHoa_w * 2.67;
+  var cucHoaMi_canhHoa_w = cucHoaMi_size * 0.6;//6
+  var cucHoaMi_canhHoa_h = cucHoaMi_canhHoa_w * 2.67;// 16.02
   var x = this.x;
   var y = this.y;
   var cucHoaMi_thanCay_h = this.height;
@@ -595,18 +595,15 @@ var drawScene = function() {
       for (int i = 0; i < numCucHoaMi_right; i++){
         cucHoaMi_right[i].draw();
       };
-
-      veTrucToaDo();
     };
-
 };
 
 mouseClicked = function() {
 //Khi click vào phạm vi đóa hoa thì hoa sẽ mọc cao lên
   //Tulips
   for(int i = 0; i < numTulips; i++){
-      if (tulips[i].x - 20 < mouseX &&  mouseX < tulips[i].x + 20){
-        if((tulips[i].y - tulips[i].height - 30) < mouseY && mouseY < ((tulips[i].y - tulips[i].height)+20)){
+      if (tulips[i].x + 5 - 44 < mouseX &&  mouseX < tulips[i].x + 5 + 44){
+        if((tulips[i].y - tulips[i].height - 44) < mouseY && mouseY < ((tulips[i].y - tulips[i].height)+44)){
         tulips[i].growBy(random(10, 20))
         }
       }
@@ -614,41 +611,42 @@ mouseClicked = function() {
 
   //Aritchoke
   for(int i = 0; i < numHoaArtichoke; i++){
-      if (hoaArtichoke[i].x - 20 < mouseX &&  mouseX < hoaArtichoke[i].x + 20){
-        if((hoaArtichoke[i].y - hoaArtichoke[i].height - 30) < mouseY && mouseY < ((hoaArtichoke[i].y - hoaArtichoke[i].height)+20)){
+      if (hoaArtichoke[i].x - 40 < mouseX &&  mouseX < hoaArtichoke[i].x + 40){
+        if((hoaArtichoke[i].y - hoaArtichoke[i].height - 60) < mouseY && mouseY < ((hoaArtichoke[i].y - hoaArtichoke[i].height)+60)){
         hoaArtichoke[i].growBy(random(10, 20))
         }
       }
     }
   //Hoa sen
   for(int i = 0; i < numHoaSen; i++){
-      if (hoaSen[i].x - 20 < mouseX &&  mouseX < hoaSen[i].x + 20){
-        if((hoaSen[i].y - hoaSen[i].height - 30) < mouseY && mouseY < ((hoaSen[i].y - hoaSen[i].height)+20)){
+      if (hoaSen[i].x - 60 < mouseX &&  mouseX < hoaSen[i].x + 60){
+        if((hoaSen[i].y - hoaSen[i].height - 60) < mouseY && mouseY < ((hoaSen[i].y - hoaSen[i].height)+ 60)){
         hoaSen[i].growBy(random(10, 20))
         }
       }
     }
+    hoaSen[1].growBy(40);
   //Hoa Hướng Dương
   for(int i = 0; i < numSunflowers; i++){
-      if (sunflowers[i].x - 20 < mouseX &&  mouseX < sunflowers[i].x + 20){
-        if((sunflowers[i].y - sunflowers[i].height - 30) < mouseY && mouseY < ((sunflowers[i].y - sunflowers[i].height)+20)){
+      if (sunflowers[i].x +5 - 30 < mouseX &&  mouseX < sunflowers[i].x +5 + 30){
+        if((sunflowers[i].y - sunflowers[i].height) + 10 < mouseY && mouseY < ((sunflowers[i].y - sunflowers[i].height) + 80)){
         sunflowers[i].growBy(random(10, 20))
         }
       }
     }
     //Cúc họa mi trái và phải đường đi
     for(int i = 0; i < numCucHoaMi; i++){
-        if (cucHoaMi[i].x - 20 < mouseX &&  mouseX < cucHoaMi[i].x + 20){
-          if((cucHoaMi[i].y - cucHoaMi[i].height - 30) < mouseY && mouseY < ((cucHoaMi[i].y - cucHoaMi[i].height)+20)){
+        if (cucHoaMi[i].x + 10 < mouseX &&  mouseX < cucHoaMi[i].x + 5 + 55){
+          if((cucHoaMi[i].y - cucHoaMi[i].height - 5) < mouseY && mouseY < ((cucHoaMi[i].y - cucHoaMi[i].height) + 40)){
           cucHoaMi[i].growBy(random(10, 15))
           }
         }
       }
 
     for(int i = 0; i < numCucHoaMi_right; i++){
-        if (cucHoaMi_right[i].x - 20 < mouseX &&  mouseX < cucHoaMi_right[i].x + 20){
-          if((cucHoaMi_right[i].y - cucHoaMi_right[i].height - 30) < mouseY && mouseY < ((cucHoaMi_right[i].y - cucHoaMi_right[i].height)+20)){
-          cucHoaMi_right[i].growBy(random(10, 20))
+        if (cucHoaMi_right[i].x - 10 < mouseX &&  mouseX < cucHoaMi_right[i].x + 5 + 55){
+          if((cucHoaMi_right[i].y - cucHoaMi_right[i].height + 10) < mouseY && mouseY < ((cucHoaMi_right[i].y - cucHoaMi_right[i].height) + 60)){
+          cucHoaMi_right[i].growBy(random(10, 15))
           }
         }
       }
