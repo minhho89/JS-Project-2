@@ -40,7 +40,7 @@ void setup()
 {
   size(canvas_x ,canvas_y);
   background(125);
-  hinh_nen = loadImage("img/background.jpg");
+  hinh_nen = loadImage("img/background2.jpg");
   grass_block = loadImage("img/grass-block2.png");
   hang_rao = loadImage("img/fence.png");
   ao_nuoc = loadImage("img/pond.png")
@@ -309,18 +309,18 @@ HoaArtichoke.prototype.growBy = function(amount) {
 *Cloud Object Type
 **********************/
 
-int numCloud = random(0,4);
+int numCloud = round(random(7,15));
 var cloud_x = [random(0, 700)];
-var cloud_y = [random(20, 150)];
-var cloud_w = [random(30, 100)];
-var cloud_h = [(605/1260) * cloud_w];
+var cloud_y = [random(0, 650)];
+var cloud_w = [random(200, 300)];
+var cloud_h = [(605/1260) * cloud_w[0]];
 
 draw_cloud = function(){
-    for(int i = 0; i < numCloud; i++){
-    cloud_x[i] = random(0, 700);
-    cloud_y[i] = random(20, 150);
-    cloud_w[i] = random(30, 100);
-    cloud_h[i] = ((605/1260) * cloud_w);
+    for(i = 0; i < numCloud; i++){
+    cloud_x.push(random(0, 700));
+    cloud_y.push(random(20, 150));
+    cloud_w.push(random(200, 300));
+    cloud_h.push((605/1260) * cloud_w[i+1]);
   }
 }
 
@@ -526,7 +526,7 @@ var draw_viahe = function() {
       tulips[i] = new Tulip(random(50, 400), random(450, 450), random(50, 100));
     }
     //Sunflowrs
-    int numSunflowers = random(4, 9);
+    int numSunflowers = random(5, 10);
     Sunflower[] sunflowers = new Sunflower[numSunflowers];
     for(int i = 0; i < numSunflowers; i++){
       sunflowers[i] = new Sunflower(random(50, 500), random(750, 780), random(50, 100));
@@ -561,8 +561,13 @@ var drawScene = function() {
       draw_hinhnen();
 
       //vẽ mây
+      draw_cloud();
       for(i = 0; i < numCloud; i++){
         image(cloud, cloud_x[i], cloud_y[i], cloud_w[i], cloud_h[i]);
+        cloud_x[i] += 0.3;
+        if(cloud_x[i] > canvas_x){
+          cloud_x[i] = -5;
+        }
       }
 
       draw_hangRao();
