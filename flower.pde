@@ -581,7 +581,7 @@ var drawScene = function() {
       for (int i = 0; i < numTulips; i++){
         stroke(0);
         fill(0,0,0,0);
-        rect(tulips[i].x + 5 - 44,tulips[i].y - tulips[i].height - 44, 88,88);
+        rect(tulips[i].x + 5 - 44,tulips[i].y - tulips[i].height - 44, tulips[i].x + 5 + 44,(tulips[i].y - tulips[i].height));
 
         tulips[i].draw();
 
@@ -613,6 +613,7 @@ var drawScene = function() {
       };
       textSize(20);
       veTrucToaDo();
+      text("mouseX = " + mouseX +";" + "mouseY =" + mouseY, mouseX, mouseY);
     };//draw
 
 };
